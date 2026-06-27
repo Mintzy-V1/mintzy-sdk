@@ -3,7 +3,6 @@ from mintzy.exceptions import (
     MintzyError, MintzyAPIError, MintzyAuthError, MintzyValidationError,
     MintzyRateLimitError, MintzyServerError, MintzyConnectionError, MintzyTimeoutError
 )
-from mintzy.models.prediction import PredictionResponse, PredictionRow, PredictionEvent
 from mintzy.models.session import (
     AuthenticateResponse, VerifyTotpResponse,
     StartTradingResponse, StopTradingResponse, DashboardResponse
@@ -11,7 +10,6 @@ from mintzy.models.session import (
 from mintzy.models.pnl import AggregatePnL, PnLRecord, LivePnL
 from mintzy.models.trade import ExitPositionResponse
 from mintzy.models.config import SavedConfiguration, ConfigurationResponse
-from mintzy.predictions.constants import SUPPORTED_TICKERS
 
 __all__ = [
     "MintzyClient",
@@ -23,9 +21,6 @@ __all__ = [
     "MintzyServerError",
     "MintzyConnectionError",
     "MintzyTimeoutError",
-    "PredictionResponse",
-    "PredictionRow",
-    "PredictionEvent",
     "AuthenticateResponse",
     "VerifyTotpResponse",
     "StartTradingResponse",
@@ -36,6 +31,5 @@ __all__ = [
     "LivePnL",
     "ExitPositionResponse",
     "SavedConfiguration",
-    "ConfigurationResponse",
-    "SUPPORTED_TICKERS"
+    "ConfigurationResponse"
 ]

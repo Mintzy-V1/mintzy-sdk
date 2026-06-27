@@ -8,25 +8,6 @@ The official Python SDK for Mintzy.
 pip install mintzy
 ```
 
-## Quickstart: Predictions
-
-```python
-from mintzy import MintzyClient
-
-client = MintzyClient(api_key="sk_live_...")
-
-response = client.predictions.get_prediction(
-    tickers=["TCS", "INFY"],
-    time_frame="20 minutes",
-    parameters=["close"],
-    candle="5m"
-)
-
-print(f"Credits remaining: {response.credits_remaining}")
-df = response.to_dataframe()
-print(df.head())
-```
-
 ## Quickstart: Trading Flow
 
 ```python
@@ -53,13 +34,6 @@ client.trading.sessions.stop(session_id=session_id)
 ```
 
 ## API Reference
-
-### Predictions (`client.predictions`)
-| Method | Description |
-|--------|-------------|
-| `get_prediction(...)` | Get predictions for specified tickers. |
-| `stream_prediction_events(...)` | Stream prediction events. |
-| `get_credits()` | Get remaining credits. |
 
 ### Trading Sessions (`client.trading.sessions`)
 | Method | Description |
