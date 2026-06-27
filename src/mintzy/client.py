@@ -6,9 +6,8 @@ from mintzy.exceptions import (
     MintzyAuthError, MintzyValidationError, MintzyRateLimitError,
     MintzyServerError, MintzyConnectionError, MintzyTimeoutError, MintzyAPIError
 )
-from mintzy.predictions.client import PredictionClient
-from mintzy.trading.admin import AdminClient
 from mintzy.trading.client import TradingClient
+from mintzy.trading.admin import AdminClient
 
 class MintzyClient:
     """The root Mintzy API client."""
@@ -26,9 +25,6 @@ class MintzyClient:
         )
         
         # Sub-clients
-        self.predictions = PredictionClient(self._request)
-        # Bind httpx client to predictions for streaming
-        self.predictions._httpx_client = self._client
         self.trading = TradingClient(self._request)
         self.admin = AdminClient(self._request)
 
