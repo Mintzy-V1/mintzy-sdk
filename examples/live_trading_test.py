@@ -12,9 +12,9 @@ def main():
     api_key = input("Enter your Mintzy API Key (sk_live_...): ").strip()
     
     # Initialize the client. By default, it hits https://api.mintzy.com
-    # For local dev testing, you can pass base_url="http://localhost:3000"
+    # For local dev testing, you can pass base_url="http://localhost:5000"
     try:
-        client = MintzyClient(api_key=api_key)
+        client = MintzyClient(api_key=api_key, base_url="http://localhost:5000")
     except Exception as e:
         print(f"❌ Failed to initialize client: {e}")
         return
