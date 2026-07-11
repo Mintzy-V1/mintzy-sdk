@@ -13,11 +13,12 @@ class SessionsClient:
     def authenticate(self, api_key: str, client_code: str, password: str) -> AuthenticateResponse:
         """Authenticate with the trading plugin."""
         payload = {
+            "broker_type": "angel",
             "api_key": api_key,
             "client_code": client_code,
             "password": password
         }
-        response = self._request("POST", "/api/plugin/authenticate", json=payload)
+        response = self._request("POST", "/api/plugin/credentials", json=payload)
         return AuthenticateResponse(**response.json())
 
     def verify_totp(self, session_id: str, totp: str) -> VerifyTotpResponse:
@@ -26,7 +27,7 @@ class SessionsClient:
             "session_id": session_id,
             "totp": totp
         }
-        response = self._request("POST", "/api/plugin/verify-totp", json=payload)
+        response = self._request("POST", "/api/plugin/totp", json=payload)
         return VerifyTotpResponse(**response.json())
 
     def start(self, session_id: str, saved_configuration_id: Optional[str] = None, **kwargs) -> StartTradingResponse:
