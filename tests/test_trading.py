@@ -5,7 +5,7 @@ from mintzy.exceptions import MintzyAuthError
 
 @respx.mock
 def test_authenticate(client):
-    respx.post("https://api.mintzy.com/api/plugin/authenticate").mock(
+    respx.post("https://api.mintzy.com/api/plugin/credentials").mock(
         return_value=httpx.Response(200, json={"session_id": "sess_123", "message": "Success"})
     )
     
@@ -27,7 +27,7 @@ def test_get_pnl(client):
 
 @respx.mock
 def test_auth_error(client):
-    respx.post("https://api.mintzy.com/api/plugin/authenticate").mock(
+    respx.post("https://api.mintzy.com/api/plugin/credentials").mock(
         return_value=httpx.Response(401, json={"error": "Unauthorized"})
     )
     
