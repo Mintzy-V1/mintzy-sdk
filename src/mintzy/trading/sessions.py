@@ -45,9 +45,24 @@ class SessionsClient:
         response = self._request("POST", "/api/plugin/stop", json=payload)
         return StopTradingResponse(**response.json())
 
+    def force_stop_session(self, session_id: str) -> Dict[str, Any]:
+        """Force stop a specific trading session."""
+        response = self._request("POST", f"/api/plugin/sessions/{session_id}/stop")
+        return response.json()
+
+    def stop_old_sessions(self) -> Dict[str, Any]:
+        """Stop old trading sessions for the user."""
+        response = self._request("POST", "/api/plugin/sessions/stop-old")
+        return response.json()
+
+    def flush_sessions(self) -> Dict[str, Any]:
+        """Flush/delete all sessions for the user."""
+        response = self._request("DELETE", "/api/plugin/sessions/flush")
+        return response.json()
+
     def exit_position(self, session_id: str, symbol: str) -> Dict[str, Any]:
         """Exit a specific position."""
-        response = self._request("POST", f"/api/plugin/exit-symbol/{session_id}/{symbol}")
+        response = self._request("POST", f"/api/plugin/{session_id}/exit-symbol/{symbol}")
         return response.json()
 
     def get_dashboard(self, session_id: Optional[str] = None) -> DashboardResponse:
