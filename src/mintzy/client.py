@@ -1,4 +1,5 @@
 import time
+import certifi
 import httpx
 from typing import Any
 
@@ -12,15 +13,17 @@ from mintzy.trading.admin import AdminClient
 class MintzyClient:
     """The root Mintzy API client."""
     
-    def __init__(self, api_key: str, base_url: str = "https://api.mintzy.com"):
+    def __init__(self, api_key: str, base_url: str = "https://api.mintzy.in", verify_ssl: bool = True):
         self.api_key = api_key
         self.base_url = base_url.rstrip("/")
         
         self._client = httpx.Client(
             base_url=self.base_url,
+            verify=verify_ssl,
             headers={
                 "Authorization": f"Bearer {self.api_key}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             }
         )
         

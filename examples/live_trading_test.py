@@ -1,5 +1,10 @@
 import sys
+import os
 import time
+
+# Ensure we use the local SDK from src/ instead of any pip installed version
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
 from mintzy import MintzyClient
 from mintzy.exceptions import MintzyError, MintzyAuthError
 
@@ -11,10 +16,10 @@ def main():
     # Ask the user for their live API token
     api_key = input("Enter your Mintzy API Key (sk_live_...): ").strip()
     
-    # Initialize the client. By default, it hits https://api.mintzy.com
+    # Initialize the client. By default, it hits https://api.mintzy.in
     # For local dev testing, you can pass base_url="http://localhost:5000"
     try:
-        client = MintzyClient(api_key=api_key, base_url="http://localhost:5000")
+        client = MintzyClient(api_key=api_key, verify_ssl=False)
     except Exception as e:
         print(f"❌ Failed to initialize client: {e}")
         return
@@ -33,8 +38,8 @@ def main():
         )
         session_id = auth_resp.session_id
         print(f"✅ Credentials received! Session ID: {session_id}")
-    except MintzyAuthError:
-        print("❌ Mintzy Auth Failed. Check your API key.")
+    except MintzyAuthError as e:
+        print(f"❌ Mintzy Auth Failed. Check your API key. Error: {e}")
         return
     except MintzyError as e:
         print(f"❌ Broker Auth Failed: {e}")
